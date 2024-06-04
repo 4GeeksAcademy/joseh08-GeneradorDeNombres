@@ -6,20 +6,15 @@ import "./assets/img/rigo-baby.jpg";
 import "./assets/img/4geeks.ico";
 
 window.onload = function() {
-  document.getElementById("dominio").innerHTML = imprimirDominios(
-    pronoun,
-    adj,
-    noun,
-    extensiones
-  );
+  document.getElementById("dominio").innerHTML = imprimirDominios();
+  imprimirDominiosConsoleLog();
 };
 
-let pronoun = ["the", "our"];
-let adj = ["great", "big"];
-let noun = ["jogger", "racoon", "aves", "volar", "ave", "rednet"];
-let extensiones = ["es", "ar", "ve", "net"];
+function generarNombres() {
+  let pronoun = ["the", "our"];
+  let adj = ["great", "big"];
+  let noun = ["jogger", "racoon", "aves", "volar", "ave", "rednet"];
 
-function generarNombres(pronoun, adj, noun) {
   let str = "";
   for (let nombre = 0; nombre < pronoun.length; nombre++) {
     for (let adjs = 0; adjs < adj.length; adjs++) {
@@ -31,7 +26,8 @@ function generarNombres(pronoun, adj, noun) {
   return str;
 }
 
-function generarHacks(dominio, extensiones) {
+function generarHacks(dominio) {
+  let extensiones = ["es", "ar", "ve", "net"];
   let arregloDominios = dominio.split(" ").flat();
   arregloDominios.length = arregloDominios.length - 1;
   let control = "-1";
@@ -56,11 +52,20 @@ function generarHacks(dominio, extensiones) {
   return arregloDominios;
 }
 
-function imprimirDominios(pronoun, adj, noun, extensiones) {
-  let str = generarHacks(generarNombres(pronoun, adj, noun), extensiones);
+function imprimirDominios() {
+  let str = generarHacks(generarNombres());
   let nuevoStr = "";
   for (let index = 0; index < str.length; index++) {
     nuevoStr += index + 1 + ". " + str[index] + "<br/>";
   }
   return nuevoStr;
+}
+
+function imprimirDominiosConsoleLog() {
+  let str = generarHacks(generarNombres());
+  let nuevoStr = "";
+  for (let index = 0; index < str.length; index++) {
+    nuevoStr += index + 1 + ". " + str[index] + "\n";
+  }
+  console.log(nuevoStr);
 }
